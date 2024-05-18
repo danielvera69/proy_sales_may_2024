@@ -1,8 +1,8 @@
+import datetime
 from decimal import Decimal
 from django.db import models
 from django.contrib.auth.models import User
 from django.utils import timezone
-
 class Brand(models.Model):
     description = models.CharField('Articulo',max_length=100)
     user = models.ForeignKey(User,on_delete=models.CASCADE)
@@ -48,7 +48,7 @@ class Product(models.Model):
     description = models.CharField('Articulo',max_length=100)
     price=models.DecimalField('Precio',max_digits=10,decimal_places=2,default=Decimal('0.0'))
     stock=models.IntegerField('Stock',default=100)
-    expiration_date = models.DateTimeField('Fecha Caducidad',default=timezone.now)
+    expiration_date = models.DateTimeField('Fecha Caducidad',default=timezone.now()+datetime.timedelta(days=30))
     brand = models.ForeignKey(Brand,on_delete=models.CASCADE,related_name='product',verbose_name='Marca')
     user = models.ForeignKey(User,on_delete=models.CASCADE)
     supplier = models.OneToOneField(Supplier,on_delete=models.CASCADE,verbose_name='Proveedor')
