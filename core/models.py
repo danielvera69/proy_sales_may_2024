@@ -8,6 +8,7 @@ from proy_sales.utils import valida_cedula,phone_regex
 
 class ActiveBrandManager(models.Manager):
     def get_queryset(self):
+        
         return super().get_queryset().filter(state=True)
    
  
